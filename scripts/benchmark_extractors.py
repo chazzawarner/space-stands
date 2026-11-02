@@ -13,10 +13,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
-from space_stds.config import Settings
-from space_stds.evaluation import BenchmarkCase, evaluate_case, load_cases, summarise
-from space_stds.pdf import PdfBackend
-from space_stds.service import StandardsService
+from space_stands.config import Settings
+from space_stands.evaluation import BenchmarkCase, evaluate_case, load_cases, summarise
+from space_stands.pdf import PdfBackend
+from space_stands.service import StandardsService
 
 
 def main() -> int:
@@ -111,7 +111,7 @@ def _benchmark_backend(
     cases: list[BenchmarkCase],
     top_k: int,
 ) -> dict[str, Any]:
-    with tempfile.TemporaryDirectory(prefix=f"space-stds-{backend}-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"space-stands-{backend}-") as temporary:
         database = Path(temporary) / "index.sqlite3"
         service = StandardsService(database, corpus_root, pdf_backend=backend)
         started = time.perf_counter()

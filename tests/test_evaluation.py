@@ -4,8 +4,8 @@ from typing import Any
 
 import pytest
 
-from space_stds.domain import SearchHit
-from space_stds.evaluation import (
+from space_stands.domain import SearchHit
+from space_stands.evaluation import (
     BenchmarkCase,
     RelevantPassage,
     evaluate_case,
@@ -26,7 +26,7 @@ def _hit(document_id: str, page: int, section: str = "4.1 Scope") -> SearchHit:
         section=section,
         excerpt="Relevant source text.",
         official_url="https://ccsds.org/example.pdf",
-        resource_uri=f"space-stds://passages/{document_id}-{page}",
+        resource_uri=f"space-stands://passages/{document_id}-{page}",
     )
 
 

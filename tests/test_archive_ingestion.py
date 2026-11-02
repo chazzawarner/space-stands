@@ -6,11 +6,11 @@ from zipfile import ZipFile, ZipInfo
 
 import pytest
 
-from space_stds import corpus_setup
-from space_stds.acquisition import extract_pdf_archive
-from space_stds.corpus_setup import prepare_acquired_corpus
-from space_stds.domain import InvalidSourceError
-from space_stds.manifest import load_manifest
+from space_stands import corpus_setup
+from space_stands.acquisition import extract_pdf_archive
+from space_stands.corpus_setup import prepare_acquired_corpus
+from space_stands.domain import InvalidSourceError
+from space_stands.manifest import load_manifest
 
 
 def test_user_can_extract_a_pdf_archive_beneath_a_new_destination(tmp_path: Path) -> None:

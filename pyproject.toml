@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "space-stds"
+name = "space-stands"
 version = "0.1.0"
 description = "A local-first MCP server for authorised CCSDS and ECSS standards"
 readme = "README.md"
@@ -24,10 +24,10 @@ dev = [
 ]
 
 [project.scripts]
-space-stds = "space_stds.cli:main"
+space-stands = "space_stands.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/space_stds"]
+packages = ["src/space_stands"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -42,7 +42,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
-packages = ["space_stds"]
+packages = ["space_stands"]
 
 [[tool.mypy.overrides]]
 module = ["pdf_inspector"]

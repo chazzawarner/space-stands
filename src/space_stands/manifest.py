@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import cast
 
-from space_stds.domain import Corpus, DocumentStatus, IngestRequest, InvalidSourceError
+from space_stands.domain import Corpus, DocumentStatus, IngestRequest, InvalidSourceError
 
 _MAX_MANIFEST_BYTES = 2 * 1024 * 1024
 _ROOT_KEYS = {"schema_version", "documents"}

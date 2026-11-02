@@ -1,4 +1,4 @@
-# space-stds
+# space-stands
 
 Local-first, read-only MCP retrieval for authorised CCSDS and ECSS standards.
 The repository contains code only. Standards files, extracted text, indexes,
@@ -27,14 +27,14 @@ Requirements: Python 3.11 or newer and [uv](https://docs.astral.sh/uv/).
 
 The script installs locked runtime dependencies and creates these local paths:
 
-- `~/.local/share/space-stds/index.sqlite3`
-- `~/.local/share/space-stds/corpus/`
+- `~/.local/share/space-stands/index.sqlite3`
+- `~/.local/share/space-stands/corpus/`
 
 Override them before setup if required by work policy:
 
 ```sh
-export SPACE_STDS_DATA_DIR=/approved/private/index-directory
-export SPACE_STDS_CORPUS_DIR=/approved/private/standards-directory
+export SPACE_STANDS_DATA_DIR=/approved/private/index-directory
+export SPACE_STANDS_CORPUS_DIR=/approved/private/standards-directory
 ./scripts/bootstrap.sh
 ```
 
@@ -42,7 +42,7 @@ Place an authorised PDF beneath the corpus directory, then index it with
 explicit provenance:
 
 ```sh
-uv run space-stds ingest "$SPACE_STDS_CORPUS_DIR/131x0b6ec1.pdf" \
+uv run space-stands ingest "$SPACE_STANDS_CORPUS_DIR/131x0b6ec1.pdf" \
   --source CCSDS \
   --document-id "CCSDS 131.0-B-6" \
   --title "TM Synchronization and Channel Coding" \
@@ -98,15 +98,15 @@ canonical document URL against the official catalogue. Then remove that review
 marker before indexing:
 
 ```sh
-uv run space-stds ingest-manifest \
-  "$SPACE_STDS_CORPUS_DIR/ingestion-manifest.generated.json"
+uv run space-stands ingest-manifest \
+  "$SPACE_STANDS_CORPUS_DIR/ingestion-manifest.generated.json"
 ```
 
 An existing acquisition manifest can be prepared separately:
 
 ```sh
-uv run space-stds prepare-corpus \
-  "$SPACE_STDS_CORPUS_DIR/acquisition-manifest.json"
+uv run space-stands prepare-corpus \
+  "$SPACE_STANDS_CORPUS_DIR/acquisition-manifest.json"
 ```
 
 The ECSS bulk PDF archive is a dated standards snapshot, and the handbook and
@@ -124,8 +124,8 @@ rebuild:
 
 ```sh
 uv sync --extra pdf-inspector
-export SPACE_STDS_PDF_BACKEND=pdf-inspector
-uv run space-stds ingest-manifest /approved/private/manifest.json
+export SPACE_STANDS_PDF_BACKEND=pdf-inspector
+uv run space-stands ingest-manifest /approved/private/manifest.json
 ```
 
 PDF Inspector runs locally and reports OCR-risk, table, and multi-column pages.
@@ -155,10 +155,10 @@ For repeatable whole-corpus setup, copy
 repository, edit it, and run:
 
 ```sh
-uv run space-stds ingest-manifest /approved/private/manifest.json
+uv run space-stands ingest-manifest /approved/private/manifest.json
 ```
 
-Each `file` is relative to `SPACE_STDS_CORPUS_DIR`. Manifest ingestion builds
+Each `file` is relative to `SPACE_STANDS_CORPUS_DIR`. Manifest ingestion builds
 and validates a complete staged database before replacing the current index. If
 any document fails, the previous index remains available. Stop the MCP server
 before rebuilding the index.
@@ -166,25 +166,25 @@ before rebuilding the index.
 Run a diagnostic query:
 
 ```sh
-uv run space-stds search "attached sync marker"
-uv run space-stds search "interface requirement" --source ECSS --status active
-uv run space-stds document "CCSDS 131.0-B-6" --revision 6
+uv run space-stands search "attached sync marker"
+uv run space-stands search "interface requirement" --source ECSS --status active
+uv run space-stands document "CCSDS 131.0-B-6" --revision 6
 ```
 
 ## MCP client configuration
 
-Use the installed executable directly. Replace `/absolute/path/to/space-stds`
+Use the installed executable directly. Replace `/absolute/path/to/space-stands`
 and the data paths with real absolute paths:
 
 ```json
 {
   "mcpServers": {
-    "space-stds": {
-      "command": "/absolute/path/to/space-stds/.venv/bin/space-stds",
+    "space-stands": {
+      "command": "/absolute/path/to/space-stands/.venv/bin/space-stands",
       "args": ["serve"],
       "env": {
-        "SPACE_STDS_DATA_DIR": "/approved/private/index-directory",
-        "SPACE_STDS_CORPUS_DIR": "/approved/private/standards-directory"
+        "SPACE_STANDS_DATA_DIR": "/approved/private/index-directory",
+        "SPACE_STANDS_CORPUS_DIR": "/approved/private/standards-directory"
       }
     }
   }
@@ -197,11 +197,11 @@ writes protocol messages only to stdout; diagnostics from the SDK use stderr.
 For Codex, register the native server with the CLI. Use absolute paths:
 
 ```sh
-codex mcp add space-stds \
-  --env SPACE_STDS_DATA_DIR=/approved/private/index-directory \
-  --env SPACE_STDS_CORPUS_DIR=/approved/private/standards-directory \
-  -- /absolute/path/to/space-stds/.venv/bin/space-stds serve
-codex mcp get space-stds
+codex mcp add space-stands \
+  --env SPACE_STANDS_DATA_DIR=/approved/private/index-directory \
+  --env SPACE_STANDS_CORPUS_DIR=/approved/private/standards-directory \
+  -- /absolute/path/to/space-stands/.venv/bin/space-stands serve
+codex mcp get space-stands
 ```
 
 Codex stores this user-level configuration in `~/.codex/config.toml`. Restart
@@ -213,8 +213,8 @@ The MCP surface is:
 - `search_standards(query, source?, document_id?, revision?, status?, limit?)`
 - `get_document(document_id, revision?, source?)`
 - `get_passage(passage_id)`
-- `space-stds://documents/{document_key}`
-- `space-stds://passages/{passage_id}`
+- `space-stands://documents/{document_key}`
+- `space-stands://passages/{passage_id}`
 
 ## Optional Docker setup
 
@@ -222,26 +222,26 @@ Docker is supported but is not required. Native execution is usually simpler
 for a desktop MCP client. Build the image once:
 
 ```sh
-docker build -t space-stds:local .
-docker volume create space-stds-data
+docker build -t space-stands:local .
+docker volume create space-stands-data
 ```
 
 Initialise it, mounting the authorised corpus read-only:
 
 ```sh
 docker run --rm \
-  --mount source=space-stds-data,target=/data \
+  --mount source=space-stands-data,target=/data \
   --mount type=bind,source=/approved/private/standards-directory,target=/corpus,readonly \
-  space-stds:local ingest-manifest /corpus/manifest.json
+  space-stands:local ingest-manifest /corpus/manifest.json
 ```
 
 For MCP stdio, retain stdin with `-i`:
 
 ```sh
 docker run --rm -i \
-  --mount source=space-stds-data,target=/data \
+  --mount source=space-stands-data,target=/data \
   --mount type=bind,source=/approved/private/standards-directory,target=/corpus,readonly \
-  space-stds:local serve
+  space-stands:local serve
 ```
 
 Use that `docker run` command and arguments in the MCP host if native execution
@@ -250,10 +250,10 @@ is prohibited.
 ## Development checks
 
 ```sh
-UV_CACHE_DIR=/tmp/space-stds-uv-cache uv sync --frozen --extra dev
-UV_CACHE_DIR=/tmp/space-stds-uv-cache uv run pytest
-UV_CACHE_DIR=/tmp/space-stds-uv-cache uv run ruff check .
-UV_CACHE_DIR=/tmp/space-stds-uv-cache uv run mypy
+UV_CACHE_DIR=/tmp/space-stands-uv-cache uv sync --frozen --extra dev
+UV_CACHE_DIR=/tmp/space-stands-uv-cache uv run pytest
+UV_CACHE_DIR=/tmp/space-stands-uv-cache uv run ruff check .
+UV_CACHE_DIR=/tmp/space-stands-uv-cache uv run mypy
 ```
 
 Run the local-corpus retrieval benchmark after ingestion:

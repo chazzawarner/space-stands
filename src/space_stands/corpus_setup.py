@@ -9,12 +9,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
 
-from space_stds.acquisition import extract_pdf_archive
-from space_stds.domain import Corpus, DocumentStatus, InvalidSourceError
-from space_stds.manifest import load_manifest
+from space_stands.acquisition import extract_pdf_archive
+from space_stands.domain import Corpus, DocumentStatus, InvalidSourceError
+from space_stands.manifest import load_manifest
 
 _MAX_ACQUISITION_MANIFEST_BYTES = 10 * 1024 * 1024
-_EXTRACTION_RECEIPT = ".space-stds-extraction.json"
+_EXTRACTION_RECEIPT = ".space-stands-extraction.json"
 _ECSS_REVISION = re.compile(r"[-_ ]Rev\.?\s*(?P<revision>\d+)$", re.IGNORECASE)
 
 

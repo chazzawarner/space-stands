@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from space_stds.domain import AmbiguousDocumentError, InvalidSourceError
-from space_stds.service import IngestRequest, StandardsService
+from space_stands.domain import AmbiguousDocumentError, InvalidSourceError
+from space_stands.service import IngestRequest, StandardsService
 from tests.pdf_factory import write_text_pdf
 
 

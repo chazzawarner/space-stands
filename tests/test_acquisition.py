@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from space_stds.acquisition import (
+from space_stands.acquisition import (
     OfficialDownload,
     discover_ccsds_publications,
     discover_directory_downloads,

@@ -4,7 +4,7 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-from space_stds.pdf import PdfBackend, parse_backend
+from space_stands.pdf import PdfBackend, parse_backend
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,10 +25,12 @@ class Settings:
     def from_environment(cls) -> Settings:
         """Resolve settings from environment overrides and local-first defaults."""
 
-        default_data = Path.home() / ".local" / "share" / "space-stds"
-        data_dir = Path(os.environ.get("SPACE_STDS_DATA_DIR", default_data)).expanduser()
-        corpus_dir = Path(os.environ.get("SPACE_STDS_CORPUS_DIR", data_dir / "corpus")).expanduser()
-        pdf_backend = parse_backend(os.environ.get("SPACE_STDS_PDF_BACKEND", "pypdf"))
+        default_data = Path.home() / ".local" / "share" / "space-stands"
+        data_dir = Path(os.environ.get("SPACE_STANDS_DATA_DIR", default_data)).expanduser()
+        corpus_dir = Path(
+            os.environ.get("SPACE_STANDS_CORPUS_DIR", data_dir / "corpus")
+        ).expanduser()
+        pdf_backend = parse_backend(os.environ.get("SPACE_STANDS_PDF_BACKEND", "pypdf"))
         return cls(
             data_dir=data_dir.resolve(),
             corpus_dir=corpus_dir.resolve(),

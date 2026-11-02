@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from space_stds.cli import main
+from space_stands.cli import main
 from tests.pdf_factory import write_text_pdf
 
 
@@ -44,8 +44,8 @@ def test_cli_ingests_manifest_and_filters_diagnostic_search(
         ),
         encoding="utf-8",
     )
-    monkeypatch.setenv("SPACE_STDS_DATA_DIR", str(data))
-    monkeypatch.setenv("SPACE_STDS_CORPUS_DIR", str(corpus))
+    monkeypatch.setenv("SPACE_STANDS_DATA_DIR", str(data))
+    monkeypatch.setenv("SPACE_STANDS_CORPUS_DIR", str(corpus))
 
     assert main(["ingest-manifest", str(manifest)]) == 0
     ingest_output = json.loads(capsys.readouterr().out)

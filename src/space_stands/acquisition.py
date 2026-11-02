@@ -16,10 +16,10 @@ from urllib.parse import unquote, urljoin, urlparse
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from zipfile import BadZipFile, ZipFile, ZipInfo
 
-from space_stds.domain import Corpus, DocumentStatus, InvalidSourceError
+from space_stands.domain import Corpus, DocumentStatus, InvalidSourceError
 
 _CCSDS_CATALOGUE_BASE = "https://ccsds.org/publications/ccsdsallpubs/"
-_EXTRACTION_RECEIPT = ".space-stds-extraction.json"
+_EXTRACTION_RECEIPT = ".space-stands-extraction.json"
 
 
 @dataclass(frozen=True)
@@ -227,7 +227,7 @@ def download_official(
             return DownloadOutcome(target, True, existing_digest, size)
 
     partial = destination / f"{filename}.part"
-    request = Request(item.url, headers={"User-Agent": "space-stds/0.1 (+local corpus setup)"})
+    request = Request(item.url, headers={"User-Agent": "space-stands/0.1 (+local corpus setup)"})
     try:
         with opener(request) as response, partial.open("wb") as output:
             final_url = response.geturl()
@@ -285,7 +285,7 @@ def extract_pdf_archive(
                 max_total_bytes=max_total_bytes,
             )
             with tempfile.TemporaryDirectory(
-                prefix=".space-stds-extract-", dir=destination.parent
+                prefix=".space-stands-extract-", dir=destination.parent
             ) as stage_directory:
                 stage_root = Path(stage_directory) / destination.name
                 stage_root.mkdir()

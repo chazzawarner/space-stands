@@ -1,1 +1,1 @@
-"""Tests for space-stds."""
+"""Tests for space-stands."""

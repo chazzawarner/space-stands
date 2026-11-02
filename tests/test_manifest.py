@@ -3,9 +3,9 @@ from pathlib import Path
 
 import pytest
 
-from space_stds.domain import IngestRequest, InvalidSourceError
-from space_stds.manifest import load_manifest
-from space_stds.service import StandardsService
+from space_stands.domain import IngestRequest, InvalidSourceError
+from space_stands.manifest import load_manifest
+from space_stands.service import StandardsService
 from tests.pdf_factory import write_text_pdf
 
 
