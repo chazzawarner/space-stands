@@ -6,18 +6,18 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import cast
 
-from space_stds.config import Settings
-from space_stds.corpus_setup import prepare_acquired_corpus
-from space_stds.domain import Corpus, DocumentStatus, IngestRequest, SpaceStdsError
-from space_stds.server import create_server
-from space_stds.service import StandardsService
+from space_stands.config import Settings
+from space_stands.corpus_setup import prepare_acquired_corpus
+from space_stands.domain import Corpus, DocumentStatus, IngestRequest, SpaceStandsError
+from space_stands.server import create_server
+from space_stands.service import StandardsService
 
 
 def build_parser() -> argparse.ArgumentParser:
     """Build the command-line contract for setup, ingestion, retrieval, and serving."""
 
     parser = argparse.ArgumentParser(
-        prog="space-stds",
+        prog="space-stands",
         description=(
             "Local CCSDS and ECSS retrieval server. Source documents never leave this machine."
         ),
@@ -155,7 +155,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "serve":
             create_server(service).run(transport="stdio")
             return 0
-    except (SpaceStdsError, ValueError) as exc:
+    except (SpaceStandsError, ValueError) as exc:
         parser.error(str(exc))
     raise AssertionError(f"Unhandled command: {args.command}")
 

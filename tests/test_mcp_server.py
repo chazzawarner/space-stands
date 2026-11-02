@@ -3,9 +3,9 @@ from pathlib import Path
 import pytest
 from mcp import Client
 
-from space_stds.domain import IngestRequest
-from space_stds.server import create_server
-from space_stds.service import StandardsService
+from space_stands.domain import IngestRequest
+from space_stands.server import create_server
+from space_stands.service import StandardsService
 from tests.pdf_factory import write_text_pdf
 
 

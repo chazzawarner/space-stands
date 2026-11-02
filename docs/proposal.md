@@ -68,7 +68,7 @@ standards hit should contain:
 - an exact, short excerpt;
 - official source URL, local content hash, and ingestion timestamp;
 - a stable resource URI such as
-  `space-stds://documents/CCSDS-131.0-B-5/passages/<id>`.
+  `space-stands://documents/CCSDS-131.0-B-5/passages/<id>`.
 
 Never present generated summaries as standards text. Label quotations and
 derived summaries separately. A client should be able to retrieve the cited
@@ -77,13 +77,13 @@ passage without rerunning a fuzzy search.
 ## Repository and application shape
 
 ```text
-space-stds/
+space-stands/
 ├── pyproject.toml
 ├── uv.lock
 ├── README.md
 ├── LICENSE
 ├── SECURITY.md
-├── src/space_stds/
+├── src/space_stands/
 │   ├── server.py             # MCP registration and transports
 │   ├── service.py            # transport-independent query API
 │   ├── domain.py             # document, passage, citation, registry types

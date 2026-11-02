@@ -940,7 +940,7 @@ wheels = [
 ]
 
 [[package]]
-name = "space-stds"
+name = "space-stands"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

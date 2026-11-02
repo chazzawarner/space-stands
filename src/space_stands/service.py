@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-from space_stds.domain import (
+from space_stands.domain import (
     AmbiguousDocumentError,
     Corpus,
     Document,
@@ -28,8 +28,8 @@ from space_stds.domain import (
     PassageNotFoundError,
     SearchHit,
 )
-from space_stds.manifest import load_manifest
-from space_stds.pdf import PdfBackend, extract_pdf
+from space_stands.manifest import load_manifest
+from space_stands.pdf import PdfBackend, extract_pdf
 
 _MAX_PDF_BYTES = 100 * 1024 * 1024
 _QUERY_TOKEN = re.compile(r"[^\W_]+(?:[.-][^\W_]+)*", re.UNICODE)
@@ -193,7 +193,7 @@ class StandardsService:
 
         requests, manifest_hash = load_manifest(manifest_path, self.corpus_root)
         with tempfile.TemporaryDirectory(
-            prefix=".space-stds-stage-", dir=self.database_path.parent
+            prefix=".space-stands-stage-", dir=self.database_path.parent
         ) as stage_directory:
             staged_path = Path(stage_directory) / "index.sqlite3"
             staged_service = StandardsService(
@@ -742,13 +742,13 @@ def _light_stem(token: str) -> str:
 def _resource_uri(passage_id: str) -> str:
     """Build the canonical MCP resource URI for an indexed passage."""
 
-    return f"space-stds://passages/{passage_id}"
+    return f"space-stands://passages/{passage_id}"
 
 
 def _document_resource_uri(document_key: str) -> str:
     """Build the canonical MCP resource URI for one document edition."""
 
-    return f"space-stds://documents/{document_key}"
+    return f"space-stands://documents/{document_key}"
 
 
 def _document_from_row(row: sqlite3.Row) -> Document:

@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
 
-from space_stds.domain import Corpus, SearchHit
+from space_stands.domain import Corpus, SearchHit
 
 
 @dataclass(frozen=True, slots=True)
@@ -256,7 +256,7 @@ def _citation_fields_complete(hit: SearchHit) -> bool:
         hit.page > 0
         and bool(hit.section)
         and hit.official_url.startswith("https://")
-        and hit.resource_uri.startswith("space-stds://passages/")
+        and hit.resource_uri.startswith("space-stands://passages/")
     )
 
 

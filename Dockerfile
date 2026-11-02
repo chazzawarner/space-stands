@@ -15,10 +15,10 @@ USER app
 RUN uv sync --frozen --no-dev --no-editable
 
 ENV PATH="/app/.venv/bin:$PATH" \
-    SPACE_STDS_DATA_DIR="/data" \
-    SPACE_STDS_CORPUS_DIR="/corpus"
+    SPACE_STANDS_DATA_DIR="/data" \
+    SPACE_STANDS_CORPUS_DIR="/corpus"
 
 VOLUME ["/data"]
-ENTRYPOINT ["space-stds"]
+ENTRYPOINT ["space-stands"]
 CMD ["serve"]
 

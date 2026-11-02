@@ -7,9 +7,9 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
-from space_stds.config import Settings
-from space_stds.evaluation import evaluate_case, load_cases, summarise
-from space_stds.service import StandardsService
+from space_stands.config import Settings
+from space_stands.evaluation import evaluate_case, load_cases, summarise
+from space_stands.service import StandardsService
 
 _MINIMUM_TOP_1 = 0.75
 _MINIMUM_MRR = 0.85

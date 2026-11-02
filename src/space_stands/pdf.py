@@ -8,7 +8,7 @@ from typing import Literal, cast
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
-from space_stds.domain import InvalidSourceError
+from space_stands.domain import InvalidSourceError
 
 _SECTION = re.compile(r"^(?P<number>\d+(?:\.\d+)+)\s+(?P<title>\S.*)$")
 _SPACE = re.compile(r"[ \t]+")

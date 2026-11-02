@@ -11,13 +11,13 @@ from datetime import UTC, datetime
 from pathlib import Path
 from urllib.request import Request, urlopen
 
-from space_stds.acquisition import (
+from space_stands.acquisition import (
     OfficialDownload,
     discover_ccsds_publications,
     discover_directory_downloads,
     download_official,
 )
-from space_stds.corpus_setup import prepare_acquired_corpus
+from space_stands.corpus_setup import prepare_acquired_corpus
 
 CCSDS_CATALOGUE = "https://ccsds.org/publications/ccsdsallpubs/"
 ECSS_ARCHIVES = "https://escies.org/ftp/ecss.nl/ECSS/"
@@ -43,7 +43,7 @@ def main() -> int:
         "--destination",
         type=Path,
         default=Path(
-            os.environ.get("SPACE_STDS_CORPUS_DIR", "~/.local/share/space-stds/corpus")
+            os.environ.get("SPACE_STANDS_CORPUS_DIR", "~/.local/share/space-stands/corpus")
         ).expanduser(),
     )
     parser.add_argument(
@@ -250,7 +250,7 @@ def _discover_ecss(collections: set[str]) -> list[OfficialDownload]:
 
 
 def _read_text(url: str) -> str:
-    request = Request(url, headers={"User-Agent": "space-stds/0.1 (+local corpus setup)"})
+    request = Request(url, headers={"User-Agent": "space-stands/0.1 (+local corpus setup)"})
     with urlopen(request, timeout=30) as response:
         return response.read().decode("utf-8", errors="replace")
 

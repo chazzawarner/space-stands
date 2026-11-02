@@ -8,23 +8,23 @@ Corpus = Literal["CCSDS", "ECSS"]
 DocumentStatus = Literal["active", "superseded", "obsolete", "draft"]
 
 
-class SpaceStdsError(Exception):
+class SpaceStandsError(Exception):
     """Base class for actionable domain failures."""
 
 
-class InvalidSourceError(SpaceStdsError):
+class InvalidSourceError(SpaceStandsError):
     """The selected source file or metadata is outside the authorised boundary."""
 
 
-class PassageNotFoundError(SpaceStdsError):
+class PassageNotFoundError(SpaceStandsError):
     """The requested passage does not exist in this index generation."""
 
 
-class DocumentNotFoundError(SpaceStdsError):
+class DocumentNotFoundError(SpaceStandsError):
     """The requested document edition is not present in the local index."""
 
 
-class AmbiguousDocumentError(SpaceStdsError):
+class AmbiguousDocumentError(SpaceStandsError):
     """A document identifier matched more than one indexed edition."""
 
 

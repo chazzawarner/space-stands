@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from space_stds.pdf import extract_pdf
+from space_stands.pdf import extract_pdf
 from tests.pdf_factory import write_text_pdf
 
 
